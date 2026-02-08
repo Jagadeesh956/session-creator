@@ -1,5 +1,7 @@
-package com.self.learn.springbootapp.dao;
+package com.spring.learn.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.self.learn.session.dao.Session;
 import jdk.jfr.DataAmount;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +11,15 @@ import java.util.UUID;
 
 public class User {
     private long UserID;
-    public List<Session> userSessions;
+      @JsonIgnore
+    private List<Session> userSessions;
 
     public List<Session> getUserSessions() {
         return userSessions;
+    }
+
+    public User(long userID) {
+        UserID = userID;
     }
 
     public void setUserSessions(List<Session> userSessions) {

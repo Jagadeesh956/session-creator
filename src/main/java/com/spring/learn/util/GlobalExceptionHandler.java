@@ -1,4 +1,4 @@
-package com.self.learn.springbootapp.util;
+package com.spring.learn.util;
 
 public class GlobalExceptionHandler {
 

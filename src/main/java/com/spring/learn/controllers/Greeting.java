@@ -1,12 +1,12 @@
-package com.self.learn.springbootapp.controllers;
+package com.spring.learn.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Greeeting {
+public class Greeting {
 
-                    @GetMapping("/greeting")
+    @GetMapping("/greeting")
     public String getMessage(){
                         return "Hello Session";
                     }
