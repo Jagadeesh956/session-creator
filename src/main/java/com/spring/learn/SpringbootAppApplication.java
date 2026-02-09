@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
                 "com.self.learn.*"
         }
 )
-@EntityScan(basePackages="com.self.learn.session.dao")
-@EnableJpaRepositories(basePackages = "com.self.learn.session.dao")
+@EntityScan(basePackages="com.spring.learn.*")
+@EnableJpaRepositories(basePackages = "com.spring.learn.*")
 public class SpringbootAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootAppApplication.class, args);
