@@ -1,6 +1,6 @@
 package com.spring.learn.controllers;
 
-import com.self.learn.session.dao.Session;
+import com.spring.learn.sessiondao.Session;
 import com.spring.learn.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,19 +19,28 @@ public class SessionController {
     Map<UUID, Session> sessionMap = new HashMap<>();
     Map<Long,List<Session>> userSessions = new HashMap<>();
     @GetMapping("/create")
-    public Session createSession(@RequestParam Long Id){
-         UUID sessionID = UUID.randomUUID();
-         String status = "ACTIVE";
-         long lastActive = System.currentTimeMillis();
-       Session createdSession = new Session(Id,sessionID,status,lastActive);
-       sessionService.SaveSession(Id,sessionID,status,lastActive);
-           sessionMap.put(sessionID,createdSession);
-           userSessions.computeIfAbsent(Id,k->new ArrayList<Session>());
-           List<Session> currentUserSessionList = userSessions.get(Id);
-           currentUserSessionList.add(createdSession);
-           return createdSession;
-
+    public ResponseEntity<?> createSession(@RequestParam Long Id){
+        if(allowNewSession(Id)) {
+            UUID sessionID = UUID.randomUUID();
+            String status = "ACTIVE";
+            long lastActive = System.currentTimeMillis();
+            Session createdSession = new Session(Id, sessionID, status, lastActive);
+            sessionService.SaveSession(Id, sessionID, status, lastActive);
+            return new ResponseEntity<>(createdSession,HttpStatusCode.valueOf(201));
+        }
+        return new ResponseEntity<>("Cannot create new session since you already have max ACTIVE",HttpStatusCode.valueOf(400));
     }
+
+    private boolean allowNewSession(long Id) {
+        long total = sessionService.userTotalSessions(Id).stream().filter(session -> session.getStatus().equals("ACTIVE")).count();
+        if(total<10){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     @GetMapping("/get")
     public ResponseEntity<Session> getSessionByID(@RequestParam UUID Id) {
         Session session = sessionService.getSession(Id);
@@ -42,13 +51,12 @@ public class SessionController {
     }
     @GetMapping("/getall")
     public List<Session> getAllSessions(@RequestParam  Long Id){
-        return userSessions.get(Id);
+        //return userSessions.get(Id);
+        return sessionService.userTotalSessions(Id);
     }
     @GetMapping("/updatestatus")
     public Session updateSessionStatus(@RequestParam UUID Id){
-        Session session = sessionMap.get(Id);
-        session.setStatus("INACTIVE");
-        return session;
+        return sessionService.updateStatus(Id);
     }
      @GetMapping("/updateTime")
     public Session updateSessionTime(@RequestParam UUID ID){
