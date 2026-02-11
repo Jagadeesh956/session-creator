@@ -1,11 +1,8 @@
 package com.spring.learn.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.self.learn.session.dao.Session;
-import jdk.jfr.DataAmount;
-import org.springframework.stereotype.Component;
+import com.spring.learn.sessiondao.Session;
 
-import javax.annotation.processing.Generated;
 import java.util.List;
 import java.util.UUID;
 
