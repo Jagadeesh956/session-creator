@@ -12,7 +12,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Jagadeesh956/session-spring-dao</url>
+            <url>https://maven.pkg.github.com/Jagadeesh956/session-creator</url>
         </repository>
         <snapshotRepository>
             <id>github</id>
@@ -20,6 +20,12 @@
             <url>https://maven.pkg.github.com/Jagadeesh956/session-spring-dao</url>
         </snapshotRepository>
     </distributionManagement>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Jagadeesh956/session-spring-dao</url>
+        </pluginRepository>
+    </pluginRepositories>
 	<groupId>com.self.learn</groupId>
 	<artifactId>session-creator</artifactId>
 	<version>0.0.1</version>
