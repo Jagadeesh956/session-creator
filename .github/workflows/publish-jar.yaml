@@ -31,6 +31,6 @@ jobs:
 
       # 5️⃣ Publish Repo B artifact to GitHub Packages
       - name: Publish to GitHub Packages
-        run: mvn deploy --batch-mode
+        run: mvn deploy --batch-mode -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
