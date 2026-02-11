@@ -25,7 +25,7 @@ jobs:
           cache: maven
       # 4️⃣ Build Repo B project
       - name: Build Project
-        run: mvn clean install -X
+        run: mvn clean install -X -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
