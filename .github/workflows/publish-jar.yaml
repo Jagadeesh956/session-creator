@@ -33,16 +33,16 @@ jobs:
               -DrepoUrl=https://maven.pkg.github.com/Jagadeesh956/session-spring-dao \
               -X
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       # 4️⃣ Build the project
       - name: Build Project
         run: mvn clean install -X
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       # 5️⃣ Deploy artifact to GitHub Packages
       - name: Publish to GitHub Packages
         run: mvn --batch-mode deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
