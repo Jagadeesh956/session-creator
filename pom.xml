@@ -16,7 +16,7 @@
     </repositories>
     <groupId>com.self.learn</groupId>
 	<artifactId>session-creator</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
     <packaging>jar</packaging>
     <distributionManagement>
         <repository>
