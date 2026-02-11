@@ -1,49 +1,48 @@
-name: Build, Validate, and Publish
+name: Build and Publish Repo B
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
-  contents: read
-  packages: write
+  contents: read  # Needed to read Repo B source
+  packages: write # Needed to publish Repo B packages
 
 jobs:
-  build-validate-publish:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout the repo
+      # 1️⃣ Checkout Repo B
       - uses: actions/checkout@v5
 
-      # 2️⃣ Setup Java
+      # 2️⃣ Setup Java and Maven cache
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: temurin
           cache: maven
 
-      # 3️⃣ Validate GitHub Packages repository access
-      - name: Validate dependency resolution
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+      # 3️⃣ Validate GitHub Packages access (Repo A dependency)
+      - name: Validate dependency from Repo A
         run: |
-          echo "Trying to fetch the dependency from GitHub Packages..."
+          echo "Fetching com.self.learn:session-spring-dao:1.0.0 from GitHub Packages..."
           mvn dependency:get \
               -Dartifact=com.self.learn:session-spring-dao:1.0.0 \
               -DrepoUrl=https://maven.pkg.github.com/Jagadeesh956/session-spring-dao \
               -X
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
-      # 4️⃣ Build the project
+      # 4️⃣ Build Repo B project
       - name: Build Project
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: mvn clean install -X
-
-      # 5️⃣ Deploy artifact to GitHub Packages
-      - name: Publish to GitHub Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-        run: mvn --batch-mode deploy
-    
+
+      # 5️⃣ Publish Repo B artifact to GitHub Packages
+      - name: Publish to GitHub Packages
+        run: mvn deploy --batch-mode
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
