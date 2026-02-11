@@ -36,7 +36,9 @@ jobs:
             </servers>
           </settings>
           EOF
-
+      - name: Resolve dependency with debug
+        run: mvn -X dependency:get \
+               -Dartifact=com.self.learn:session-spring-dao:1.0.0
       - name: Publish package
         run: mvn --batch-mode deploy
 
