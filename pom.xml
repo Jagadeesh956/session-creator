@@ -8,42 +8,27 @@
 		<version>3.5.10</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-    <distributionManagement>
+    <repositories>
         <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Jagadeesh956/session-creator</url>
-        </repository>
-        <snapshotRepository>
-            <id>github</id>
-            <name>GitHub Packages Snapshots</name>
+            <id>github-repo-session-spring-dao</id>
             <url>https://maven.pkg.github.com/Jagadeesh956/session-spring-dao</url>
-        </snapshotRepository>
-    </distributionManagement>
+        </repository>
+    </repositories>
+
+    <!-- Plugin repository for GitHub Packages -->
     <pluginRepositories>
         <pluginRepository>
-            <id>github</id>
+            <id>github-repo-session-spring-dao</id>
             <url>https://maven.pkg.github.com/Jagadeesh956/session-spring-dao</url>
         </pluginRepository>
     </pluginRepositories>
-	<groupId>com.self.learn</groupId>
+
+    <groupId>com.self.learn</groupId>
 	<artifactId>session-creator</artifactId>
 	<version>0.0.1</version>
-	<name>springboot-app</name>
+	<name>session-creation-app</name>
 	<description>Self exploration of springboot framework</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+    <url>https://github.com/Jagadeesh956/session-creator</url>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -52,7 +37,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
