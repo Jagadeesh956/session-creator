@@ -33,7 +33,8 @@ jobs:
               -DrepoUrl=https://maven.pkg.github.com/Jagadeesh956/session-spring-dao \
               -X
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          MAVEN_USERNAME: Jagadeesh956
+          MAVEN_PASSWORD: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       # 4️⃣ Build Repo B project
       - name: Build Project
