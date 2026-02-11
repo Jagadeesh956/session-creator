@@ -23,19 +23,6 @@ jobs:
           java-version: '17'
           distribution: temurin
           cache: maven
-
-      # 3️⃣ Validate GitHub Packages access (Repo A dependency)
-      - name: Validate dependency from Repo A
-        run: |
-          echo "Fetching com.self.learn:session-spring-dao:1.0.0 from GitHub Packages..."
-          mvn dependency:get \
-              -Dartifact=com.self.learn:session-spring-dao:1.0.0 \
-              -DrepoUrl=https://maven.pkg.github.com/Jagadeesh956/session-spring-dao \
-              -X
-        env:
-          MAVEN_USERNAME: Jagadeesh956
-          MAVEN_PASSWORD: ${{ secrets.GH_PACKAGES_TOKEN }}
-
       # 4️⃣ Build Repo B project
       - name: Build Project
         run: mvn clean install -X
